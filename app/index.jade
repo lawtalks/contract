@@ -4,14 +4,6 @@ block content
   h1.title  LawTalks
 
   p
-  
-  //- form.form-contract
-  //-   ul
-  //-     li 1
-  //-       span.btn-group
-  //-         button.btn 下一步
-  //-     li 2
-  //-     li 3
 
   .panel
     div#demo
@@ -48,11 +40,15 @@ block content
       form(class="form-horizontal form-contract")
         div(class="panel-body")
           div(class="tab-content")
-            div(id="demo-cls-tab1" class="tab-pane")
+            div(id="demo-cls-tab1" class="tab-pane active")
               div(class="form-group")
                 label(class="col-lg-3 control-label") 姓名
                 div(class="col-lg-7")
                   input(type="text" class="form-control" name="borrower-name" placeholder="借款人姓名")
+              div(class="form-group")
+                label(class="col-lg-3 control-label") 身份证
+                div(class="col-lg-7")
+                  input(type="text" class="form-control" name="borrower-identification" placeholder="借款人身份证")
               div(class="form-group")
                 label(class="col-lg-3 control-label") 原因
                 div(class="col-lg-7")
@@ -84,7 +80,7 @@ block content
                 label(class="col-lg-3 control-label") 日期
                 div(class="col-lg-7")
                   input(type="date" class="form-control" name="borrower-date" placeholder="归还的日期")
-            div(id="demo-cls-tab5" class="tab-pane tab-finish active")
+            div(id="demo-cls-tab5" class="tab-pane tab-finish")
               h4 借条
               p(class="text-muted")
                 |为[借款目的]，今收到[借款人]（身份证号码：[借款人身份证号]）出借予我的现金人民币[借款金额]元，举借期限为[借款其]个月，月利息[利息]%，[2014年**月**日]前归还本金及利息。立此为据。
@@ -96,16 +92,17 @@ block content
           div(class="box-inline") 
             button(type="button" class="previous btn btn-law disabled") 上一步
             button(type="button" class="next btn btn-law") 下一步
-            button(type="button" class="finish btn btn-pink" disabled="" style="display: none;") 完成
+            button(type="button" class="finish btn btn-finish" disabled="" style="display: none;") 完成
 
-  script(type="javascript", src="javascripts/mustache.js")
-  script(id="receip-template" type="x-tmpl-mustache")
+block script
+  script(type="text/javascript", src="javascripts/mustache.js")
+  script(id="receipt-template" type="x-tmpl-mustache")
     h4 借条
     p(class="text-content")
-      |为{{borrower-reason}}，今收到{{borrower-name}}（身份证号码：{{lender-identification}}）
+      |为{{borrower-reason}}，今收到{{lender-name}}（身份证号码：{{lender-identification}}）
       |出借予我的现金人民币{{lender-property}}元，举借期限为{{lender-month}}个月，月利息{{lender-interest}}%，
       |{{borrower-date}}前归还本金及利息。立此为据。
-    p(class="text-signature") 借款人：             
-    p(class="text-signature") 身份证号码：
-    p(class="text-signature") 签署日期：
-  script(type="javascript", src="javascripts/receipt.js")
+    p(class="text-signature") 借款人：{{borrower-name}}       
+    p(class="text-signature") 身份证号码：{{borrower-identification}}
+    p(class="text-signature") 签署日期：{{today}}
+  script(type="text/javascript", src="javascripts/receipt.js")
