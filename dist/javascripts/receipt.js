@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
       "today" : [date.getYear()+1900,date.getMonth()+1, date.getDate()].join('.')
     }
     var renderedReceipt = Mustache.render(receiptTemplate, receiptInfo);
-    console.log(renderedReceipt)
+    $tabFinish.html(renderedReceipt);
   }
 
 });
