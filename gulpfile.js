@@ -17,7 +17,7 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 
-gulp.task('default', ['sass', 'css', 'js', 'jade'], function () { 
+gulp.task('default', ['fonts', 'css', 'js', 'jade'], function () { 
 
     gulp.watch('./app/stylesheets/*.scss', ['sass']);
     gulp.watch('./app/stylesheets/*.css', ['css']);
@@ -36,23 +36,42 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
     gulp.src('./bower_components/zepto/zepto.min.js')
-      .pipe(gulp.dest('./dist/js/'))
-    
-    return gulp.src('./app/javascripts/*.js')
+      .pipe(gulp.dest('./dist/javascripts/'));
+    gulp.src('./bower_components/jquery/dist/jquery.min.js')
+      .pipe(gulp.dest('./dist/javascripts/'));
+    gulp.src('./bower_components/bootstrap/dist/js/bootstrap.min.js')
+        .pipe(gulp.dest('./dist/javascripts/'));
+    gulp.src('./bower_components/mustache/mustache.js')
+        .pipe(gulp.dest('./dist/javascripts/'));
+    gulp.src('./app/javascripts/*.js')
         .pipe(gulp.dest('./dist/javascripts/'));
 })
 
+gulp.task('fonts', function () {
+    gulp.src('./bower_components/bootstrap/fonts/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+    gulp.src('./bower_components/fontawesome/fonts/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+})
+
+
 gulp.task('css', function () {
-    return gulp.src('./app/stylesheets/*.css')
+    gulp.src('./bower_components/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest('./dist/stylesheets/'));
+    gulp.src('./bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
+        .pipe(gulp.dest('./dist/stylesheets/'));
+    gulp.src('./bower_components/fontawesome/css/font-awesome.min.css')
+        .pipe(gulp.dest('./dist/stylesheets/'));
+    gulp.src('./app/stylesheets/*.css')
         .pipe(gulp.dest('./dist/stylesheets/'));
 })
 
 gulp.task('jade', function () {
-    return gulp.src('./app/index.jade')
-        .pipe(jade({
-          locals: {}
-        }))
-        .pipe(gulp.dest('./dist/'))
+    gulp.src('./app/index.jade')
+      .pipe(jade({
+        locals: {}
+      }))
+      .pipe(gulp.dest('./dist/'));
 });
 
 
