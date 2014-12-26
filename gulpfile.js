@@ -17,8 +17,12 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 
-gulp.task('default', ['sass', 'js', 'jade'], function () { 
-  
+gulp.task('default', ['sass', 'css', 'js', 'jade'], function () { 
+
+    gulp.watch('./app/stylesheets/*.scss', ['sass']);
+    gulp.watch('./app/stylesheets/*.css', ['css']);
+    gulp.watch('./app/javascripts/*.js', ['js']);
+    gulp.watch('./app/index.jade', ['jade']);
 });
 
 gulp.task('sass', function () {
@@ -31,8 +35,16 @@ gulp.task('sass', function () {
 });
 
 gulp.task('js', function () {
+    gulp.src('./bower_components/zepto/zepto.min.js')
+      .pipe(gulp.dest('./dist/js/'))
+    
     return gulp.src('./app/javascripts/*.js')
-        .pipe(gulp.dest('./dist/js/'));
+        .pipe(gulp.dest('./dist/javascripts/'));
+})
+
+gulp.task('css', function () {
+    return gulp.src('./app/stylesheets/*.css')
+        .pipe(gulp.dest('./dist/stylesheets/'));
 })
 
 gulp.task('jade', function () {
@@ -43,11 +55,6 @@ gulp.task('jade', function () {
         .pipe(gulp.dest('./dist/'))
 });
 
-gulp.task('watch', function () {
-    gulp.watch('./app/stylesheets/*.scss', ['sass']);
-    gulp.watch('./app/javascripts/*.js', ['js']);
-    gulp.watch('./app/index.jade', ['jade']);
-})
 
 gulp.task('clean', function () {
     return gulp.src('./dist', {read: false})
