@@ -68,6 +68,7 @@ jQuery(document).ready(function(){
       "borrower-reason" : $('input[name="borrower-reason"]')[0].value,
       "borrower-date" : $('input[name="borrower-date"]')[0].value,
       "lender-name" : $('input[name="lender-name"]')[0].value,
+      "lender-identification" : $('input[name="lender-identification"]')[0].value,
       "lender-property" : $('input[name="lender-property"]')[0].value,
       "lender-interest" : $('input[name="lender-interest"]')[0].value,
       "lender-month" : $('input[name="lender-month"]')[0].value,
