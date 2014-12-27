@@ -1,0 +1,4 @@
+- npm i
+- npm install -g bower gulp
+- bower install
+- gulp
